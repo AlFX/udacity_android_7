@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Shut up and read!</string>
+    <string name="hint">Can\'t search nothing!</string>
+    <string name="no_connection">Hey, you\'ve got some connection problems</string>
+    <string name="search_button_label">Go!</string>
+    <string name="search_hint">Find a good read</string>
+    <string name="title_placeholder">Title</string>
+    <string name="author_placeholder">Author</string>
+</resources>
