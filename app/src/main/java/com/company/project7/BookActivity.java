@@ -160,7 +160,7 @@ public class BookActivity extends AppCompatActivity {
             } else {
                 /* in this case connectivity flag must be false so display empty state */
                 mEmptyView.setVisibility(View.VISIBLE);
-                mEmptyView.setText(R.string.no_connection);
+                mEmptyView.setText(R.string.no_books);
             }
         }
     }

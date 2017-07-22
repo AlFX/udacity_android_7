@@ -39,32 +39,34 @@ public class QueryUtils {
 
         try {
             JSONObject baseJsonResponse = new JSONObject(booksJSON);
-            JSONArray booksArray = baseJsonResponse.getJSONArray("items");
+            if (baseJsonResponse.has("items")) {
+                JSONArray booksArray = baseJsonResponse.getJSONArray("items");
 
-            /* For each book create an object */
-            for (int i = 0; i < booksArray.length(); i++) {
-                JSONObject currentBook = booksArray.getJSONObject(i);
-                JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
+                /* For each book create an object */
+                for (int i = 0; i < booksArray.length(); i++) {
+                    JSONObject currentBook = booksArray.getJSONObject(i);
+                    JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
 
-                /* retrieve the title */
-                String title = volumeInfo.getString("title");
+                  /* retrieve the title */
+                    String title = volumeInfo.getString("title");
 
-                /* "authors" key might contain multiple values! */
-                JSONArray authorsArray;
-                StringBuilder authors = new StringBuilder();
-                if (volumeInfo.has("authors")) {
-                    authorsArray = volumeInfo.getJSONArray("authors");
-                    for (int n = 0; n < authorsArray.length(); n++) {
-                        authors.append(System.getProperty("line.separator"));
-                        authors.append(authorsArray.getString(n));
+                   /* "authors" key might contain multiple values! */
+                    JSONArray authorsArray;
+                    StringBuilder authors = new StringBuilder();
+                    if (volumeInfo.has("authors")) {
+                        authorsArray = volumeInfo.getJSONArray("authors");
+                        for (int n = 0; n < authorsArray.length(); n++) {
+                            authors.append(System.getProperty("line.separator"));
+                            authors.append(authorsArray.getString(n));
+                        }
+                    } else {
+                        authors.append("No Author");
                     }
-                } else {
-                    authors.append("No Author");
-                }
 
                 /* Create a new Book object and append it to the ArrayList */
-                Book booksObject = new Book(title, authors);
-                books.add(booksObject);
+                    Book booksObject = new Book(title, authors);
+                    books.add(booksObject);
+                }
             }
         } catch (JSONException e) {
             /* catch any exception here, prevent a crash */
